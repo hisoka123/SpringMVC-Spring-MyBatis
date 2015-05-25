@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ylw.dao.AdminMapper" >
+  <resultMap id="BaseResultMap" type="ylw.model.Admin" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="usertype" property="usertype" jdbcType="REAL" />
+    <result column="userid" property="userid" jdbcType="CHAR" />
+    <result column="pwd" property="pwd" jdbcType="CHAR" />
+    <result column="uname" property="uname" jdbcType="CHAR" />
+    <result column="tname" property="tname" jdbcType="CHAR" />
+    <result column="email" property="email" jdbcType="CHAR" />
+    <result column="logintime" property="logintime" jdbcType="INTEGER" />
+    <result column="loginip" property="loginip" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="ylw.model.Admin" extends="BaseResultMap" >
+    <result column="typeid" property="typeid" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, usertype, userid, pwd, uname, tname, email, logintime, loginip
+  </sql>
+  <sql id="Blob_Column_List" >
+    typeid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from yl_admin
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from yl_admin
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="ylw.model.Admin" >
+    insert into yl_admin (id, usertype, userid, 
+      pwd, uname, tname, email, 
+      logintime, loginip, typeid
+      )
+    values (#{id,jdbcType=INTEGER}, #{usertype,jdbcType=REAL}, #{userid,jdbcType=CHAR}, 
+      #{pwd,jdbcType=CHAR}, #{uname,jdbcType=CHAR}, #{tname,jdbcType=CHAR}, #{email,jdbcType=CHAR}, 
+      #{logintime,jdbcType=INTEGER}, #{loginip,jdbcType=VARCHAR}, #{typeid,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="ylw.model.Admin" >
+    insert into yl_admin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="usertype != null" >
+        usertype,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="pwd != null" >
+        pwd,
+      </if>
+      <if test="uname != null" >
+        uname,
+      </if>
+      <if test="tname != null" >
+        tname,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="logintime != null" >
+        logintime,
+      </if>
+      <if test="loginip != null" >
+        loginip,
+      </if>
+      <if test="typeid != null" >
+        typeid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=REAL},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=CHAR},
+      </if>
+      <if test="pwd != null" >
+        #{pwd,jdbcType=CHAR},
+      </if>
+      <if test="uname != null" >
+        #{uname,jdbcType=CHAR},
+      </if>
+      <if test="tname != null" >
+        #{tname,jdbcType=CHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=CHAR},
+      </if>
+      <if test="logintime != null" >
+        #{logintime,jdbcType=INTEGER},
+      </if>
+      <if test="loginip != null" >
+        #{loginip,jdbcType=VARCHAR},
+      </if>
+      <if test="typeid != null" >
+        #{typeid,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ylw.model.Admin" >
+    update yl_admin
+    <set >
+      <if test="usertype != null" >
+        usertype = #{usertype,jdbcType=REAL},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=CHAR},
+      </if>
+      <if test="pwd != null" >
+        pwd = #{pwd,jdbcType=CHAR},
+      </if>
+      <if test="uname != null" >
+        uname = #{uname,jdbcType=CHAR},
+      </if>
+      <if test="tname != null" >
+        tname = #{tname,jdbcType=CHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=CHAR},
+      </if>
+      <if test="logintime != null" >
+        logintime = #{logintime,jdbcType=INTEGER},
+      </if>
+      <if test="loginip != null" >
+        loginip = #{loginip,jdbcType=VARCHAR},
+      </if>
+      <if test="typeid != null" >
+        typeid = #{typeid,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="ylw.model.Admin" >
+    update yl_admin
+    set usertype = #{usertype,jdbcType=REAL},
+      userid = #{userid,jdbcType=CHAR},
+      pwd = #{pwd,jdbcType=CHAR},
+      uname = #{uname,jdbcType=CHAR},
+      tname = #{tname,jdbcType=CHAR},
+      email = #{email,jdbcType=CHAR},
+      logintime = #{logintime,jdbcType=INTEGER},
+      loginip = #{loginip,jdbcType=VARCHAR},
+      typeid = #{typeid,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ylw.model.Admin" >
+    update yl_admin
+    set usertype = #{usertype,jdbcType=REAL},
+      userid = #{userid,jdbcType=CHAR},
+      pwd = #{pwd,jdbcType=CHAR},
+      uname = #{uname,jdbcType=CHAR},
+      tname = #{tname,jdbcType=CHAR},
+      email = #{email,jdbcType=CHAR},
+      logintime = #{logintime,jdbcType=INTEGER},
+      loginip = #{loginip,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

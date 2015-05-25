@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ylw.dao.GgjrMapper" >
+  <resultMap id="BaseResultMap" type="ylw.model.Ggjr" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="hdate" property="hdate" jdbcType="DATE" />
+    <result column="tid" property="tid" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="ylw.model.GgjrWithBLOBs" extends="BaseResultMap" >
+    <result column="hname" property="hname" jdbcType="LONGVARCHAR" />
+    <result column="descinfo" property="descinfo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, hdate, tid
+  </sql>
+  <sql id="Blob_Column_List" >
+    hname, descinfo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from yl_ggjr
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from yl_ggjr
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="ylw.model.GgjrWithBLOBs" >
+    insert into yl_ggjr (id, hdate, tid, 
+      hname, descinfo)
+    values (#{id,jdbcType=INTEGER}, #{hdate,jdbcType=DATE}, #{tid,jdbcType=INTEGER}, 
+      #{hname,jdbcType=LONGVARCHAR}, #{descinfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="ylw.model.GgjrWithBLOBs" >
+    insert into yl_ggjr
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="hdate != null" >
+        hdate,
+      </if>
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="hname != null" >
+        hname,
+      </if>
+      <if test="descinfo != null" >
+        descinfo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="hdate != null" >
+        #{hdate,jdbcType=DATE},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="hname != null" >
+        #{hname,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="descinfo != null" >
+        #{descinfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ylw.model.GgjrWithBLOBs" >
+    update yl_ggjr
+    <set >
+      <if test="hdate != null" >
+        hdate = #{hdate,jdbcType=DATE},
+      </if>
+      <if test="tid != null" >
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="hname != null" >
+        hname = #{hname,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="descinfo != null" >
+        descinfo = #{descinfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="ylw.model.GgjrWithBLOBs" >
+    update yl_ggjr
+    set hdate = #{hdate,jdbcType=DATE},
+      tid = #{tid,jdbcType=INTEGER},
+      hname = #{hname,jdbcType=LONGVARCHAR},
+      descinfo = #{descinfo,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ylw.model.Ggjr" >
+    update yl_ggjr
+    set hdate = #{hdate,jdbcType=DATE},
+      tid = #{tid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

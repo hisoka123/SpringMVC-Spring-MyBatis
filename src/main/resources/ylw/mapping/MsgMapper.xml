@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ylw.dao.MsgMapper" >
+  <resultMap id="BaseResultMap" type="ylw.model.Msg" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="rid" property="rid" jdbcType="INTEGER" />
+    <result column="is_Read" property="isRead" jdbcType="INTEGER" />
+    <result column="send_date" property="sendDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="ylw.model.MsgWithBLOBs" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <result column="s_name" property="sName" jdbcType="LONGVARCHAR" />
+    <result column="r_name" property="rName" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, sid, rid, is_Read, send_date
+  </sql>
+  <sql id="Blob_Column_List" >
+    content, s_name, r_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from yl_msg
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from yl_msg
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="ylw.model.MsgWithBLOBs" >
+    insert into yl_msg (id, sid, rid, 
+      is_Read, send_date, content, 
+      s_name, r_name)
+    values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{rid,jdbcType=INTEGER}, 
+      #{isRead,jdbcType=INTEGER}, #{sendDate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}, 
+      #{sName,jdbcType=LONGVARCHAR}, #{rName,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="ylw.model.MsgWithBLOBs" >
+    insert into yl_msg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="rid != null" >
+        rid,
+      </if>
+      <if test="isRead != null" >
+        is_Read,
+      </if>
+      <if test="sendDate != null" >
+        send_date,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="sName != null" >
+        s_name,
+      </if>
+      <if test="rName != null" >
+        r_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="rid != null" >
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="isRead != null" >
+        #{isRead,jdbcType=INTEGER},
+      </if>
+      <if test="sendDate != null" >
+        #{sendDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sName != null" >
+        #{sName,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="rName != null" >
+        #{rName,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ylw.model.MsgWithBLOBs" >
+    update yl_msg
+    <set >
+      <if test="sid != null" >
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="rid != null" >
+        rid = #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="isRead != null" >
+        is_Read = #{isRead,jdbcType=INTEGER},
+      </if>
+      <if test="sendDate != null" >
+        send_date = #{sendDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sName != null" >
+        s_name = #{sName,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="rName != null" >
+        r_name = #{rName,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="ylw.model.MsgWithBLOBs" >
+    update yl_msg
+    set sid = #{sid,jdbcType=INTEGER},
+      rid = #{rid,jdbcType=INTEGER},
+      is_Read = #{isRead,jdbcType=INTEGER},
+      send_date = #{sendDate,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR},
+      s_name = #{sName,jdbcType=LONGVARCHAR},
+      r_name = #{rName,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ylw.model.Msg" >
+    update yl_msg
+    set sid = #{sid,jdbcType=INTEGER},
+      rid = #{rid,jdbcType=INTEGER},
+      is_Read = #{isRead,jdbcType=INTEGER},
+      send_date = #{sendDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

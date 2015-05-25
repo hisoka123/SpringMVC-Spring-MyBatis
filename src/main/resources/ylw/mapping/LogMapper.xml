@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ylw.dao.LogMapper" >
+  <resultMap id="BaseResultMap" type="ylw.model.Log" >
+    <id column="lid" property="lid" jdbcType="INTEGER" />
+    <result column="adminid" property="adminid" jdbcType="SMALLINT" />
+    <result column="filename" property="filename" jdbcType="CHAR" />
+    <result column="method" property="method" jdbcType="CHAR" />
+    <result column="query" property="query" jdbcType="CHAR" />
+    <result column="cip" property="cip" jdbcType="CHAR" />
+    <result column="dtime" property="dtime" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    lid, adminid, filename, method, query, cip, dtime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from yl_log
+    where lid = #{lid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from yl_log
+    where lid = #{lid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="ylw.model.Log" >
+    insert into yl_log (lid, adminid, filename, 
+      method, query, cip, dtime
+      )
+    values (#{lid,jdbcType=INTEGER}, #{adminid,jdbcType=SMALLINT}, #{filename,jdbcType=CHAR}, 
+      #{method,jdbcType=CHAR}, #{query,jdbcType=CHAR}, #{cip,jdbcType=CHAR}, #{dtime,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="ylw.model.Log" >
+    insert into yl_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="lid != null" >
+        lid,
+      </if>
+      <if test="adminid != null" >
+        adminid,
+      </if>
+      <if test="filename != null" >
+        filename,
+      </if>
+      <if test="method != null" >
+        method,
+      </if>
+      <if test="query != null" >
+        query,
+      </if>
+      <if test="cip != null" >
+        cip,
+      </if>
+      <if test="dtime != null" >
+        dtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="lid != null" >
+        #{lid,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=SMALLINT},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=CHAR},
+      </if>
+      <if test="method != null" >
+        #{method,jdbcType=CHAR},
+      </if>
+      <if test="query != null" >
+        #{query,jdbcType=CHAR},
+      </if>
+      <if test="cip != null" >
+        #{cip,jdbcType=CHAR},
+      </if>
+      <if test="dtime != null" >
+        #{dtime,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ylw.model.Log" >
+    update yl_log
+    <set >
+      <if test="adminid != null" >
+        adminid = #{adminid,jdbcType=SMALLINT},
+      </if>
+      <if test="filename != null" >
+        filename = #{filename,jdbcType=CHAR},
+      </if>
+      <if test="method != null" >
+        method = #{method,jdbcType=CHAR},
+      </if>
+      <if test="query != null" >
+        query = #{query,jdbcType=CHAR},
+      </if>
+      <if test="cip != null" >
+        cip = #{cip,jdbcType=CHAR},
+      </if>
+      <if test="dtime != null" >
+        dtime = #{dtime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where lid = #{lid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ylw.model.Log" >
+    update yl_log
+    set adminid = #{adminid,jdbcType=SMALLINT},
+      filename = #{filename,jdbcType=CHAR},
+      method = #{method,jdbcType=CHAR},
+      query = #{query,jdbcType=CHAR},
+      cip = #{cip,jdbcType=CHAR},
+      dtime = #{dtime,jdbcType=INTEGER}
+    where lid = #{lid,jdbcType=INTEGER}
+  </update>
+</mapper>

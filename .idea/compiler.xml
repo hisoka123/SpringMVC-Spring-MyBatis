@@ -22,10 +22,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="ylw" />
         <module name="zhibing_mybatis" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="ylw" target="1.6" />
       <module name="zhibing_mybatis" target="1.6" />
     </bytecodeTargetLevel>
   </component>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ylw.dao.ScMapper" >
+  <resultMap id="BaseResultMap" type="ylw.model.Sc" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="yl__id" property="ylId" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="aid" property="aid" jdbcType="INTEGER" />
+    <result column="sdate" property="sdate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, yl__id, uid, aid, sdate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from yl_sc
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from yl_sc
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="ylw.model.Sc" >
+    insert into yl_sc (id, yl__id, uid, 
+      aid, sdate)
+    values (#{id,jdbcType=INTEGER}, #{ylId,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, 
+      #{aid,jdbcType=INTEGER}, #{sdate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="ylw.model.Sc" >
+    insert into yl_sc
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ylId != null" >
+        yl__id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="aid != null" >
+        aid,
+      </if>
+      <if test="sdate != null" >
+        sdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ylId != null" >
+        #{ylId,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="aid != null" >
+        #{aid,jdbcType=INTEGER},
+      </if>
+      <if test="sdate != null" >
+        #{sdate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ylw.model.Sc" >
+    update yl_sc
+    <set >
+      <if test="ylId != null" >
+        yl__id = #{ylId,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="aid != null" >
+        aid = #{aid,jdbcType=INTEGER},
+      </if>
+      <if test="sdate != null" >
+        sdate = #{sdate,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ylw.model.Sc" >
+    update yl_sc
+    set yl__id = #{ylId,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      aid = #{aid,jdbcType=INTEGER},
+      sdate = #{sdate,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

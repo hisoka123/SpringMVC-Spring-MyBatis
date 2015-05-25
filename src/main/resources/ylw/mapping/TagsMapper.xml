@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ylw.dao.TagsMapper" >
+  <resultMap id="BaseResultMap" type="ylw.model.Tags" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cdate" property="cdate" jdbcType="DATE" />
+    <result column="category" property="category" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="ylw.model.Tags" extends="BaseResultMap" >
+    <result column="tname" property="tname" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, cdate, category
+  </sql>
+  <sql id="Blob_Column_List" >
+    tname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from yl_tags
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from yl_tags
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="ylw.model.Tags" >
+    insert into yl_tags (id, cdate, category, 
+      tname)
+    values (#{id,jdbcType=INTEGER}, #{cdate,jdbcType=DATE}, #{category,jdbcType=INTEGER}, 
+      #{tname,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="ylw.model.Tags" >
+    insert into yl_tags
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cdate != null" >
+        cdate,
+      </if>
+      <if test="category != null" >
+        category,
+      </if>
+      <if test="tname != null" >
+        tname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cdate != null" >
+        #{cdate,jdbcType=DATE},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=INTEGER},
+      </if>
+      <if test="tname != null" >
+        #{tname,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ylw.model.Tags" >
+    update yl_tags
+    <set >
+      <if test="cdate != null" >
+        cdate = #{cdate,jdbcType=DATE},
+      </if>
+      <if test="category != null" >
+        category = #{category,jdbcType=INTEGER},
+      </if>
+      <if test="tname != null" >
+        tname = #{tname,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="ylw.model.Tags" >
+    update yl_tags
+    set cdate = #{cdate,jdbcType=DATE},
+      category = #{category,jdbcType=INTEGER},
+      tname = #{tname,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ylw.model.Tags" >
+    update yl_tags
+    set cdate = #{cdate,jdbcType=DATE},
+      category = #{category,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

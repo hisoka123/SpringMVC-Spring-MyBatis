@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ylw.dao.PybqMapper" >
+  <resultMap id="BaseResultMap" type="ylw.model.Pybq" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="fid" property="fid" jdbcType="INTEGER" />
+    <result column="tdate" property="tdate" jdbcType="DATE" />
+    <result column="fscore" property="fscore" jdbcType="INTEGER" />
+    <result column="sdate" property="sdate" jdbcType="DATE" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="ylw.model.Pybq" extends="BaseResultMap" >
+    <result column="impression" property="impression" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uid, fid, tdate, fscore, sdate
+  </sql>
+  <sql id="Blob_Column_List" >
+    impression
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from yl_pybq
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from yl_pybq
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="ylw.model.Pybq" >
+    insert into yl_pybq (id, uid, fid, 
+      tdate, fscore, sdate, impression
+      )
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{fid,jdbcType=INTEGER}, 
+      #{tdate,jdbcType=DATE}, #{fscore,jdbcType=INTEGER}, #{sdate,jdbcType=DATE}, #{impression,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="ylw.model.Pybq" >
+    insert into yl_pybq
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="tdate != null" >
+        tdate,
+      </if>
+      <if test="fscore != null" >
+        fscore,
+      </if>
+      <if test="sdate != null" >
+        sdate,
+      </if>
+      <if test="impression != null" >
+        impression,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="tdate != null" >
+        #{tdate,jdbcType=DATE},
+      </if>
+      <if test="fscore != null" >
+        #{fscore,jdbcType=INTEGER},
+      </if>
+      <if test="sdate != null" >
+        #{sdate,jdbcType=DATE},
+      </if>
+      <if test="impression != null" >
+        #{impression,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ylw.model.Pybq" >
+    update yl_pybq
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="fid != null" >
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="tdate != null" >
+        tdate = #{tdate,jdbcType=DATE},
+      </if>
+      <if test="fscore != null" >
+        fscore = #{fscore,jdbcType=INTEGER},
+      </if>
+      <if test="sdate != null" >
+        sdate = #{sdate,jdbcType=DATE},
+      </if>
+      <if test="impression != null" >
+        impression = #{impression,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="ylw.model.Pybq" >
+    update yl_pybq
+    set uid = #{uid,jdbcType=INTEGER},
+      fid = #{fid,jdbcType=INTEGER},
+      tdate = #{tdate,jdbcType=DATE},
+      fscore = #{fscore,jdbcType=INTEGER},
+      sdate = #{sdate,jdbcType=DATE},
+      impression = #{impression,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ylw.model.Pybq" >
+    update yl_pybq
+    set uid = #{uid,jdbcType=INTEGER},
+      fid = #{fid,jdbcType=INTEGER},
+      tdate = #{tdate,jdbcType=DATE},
+      fscore = #{fscore,jdbcType=INTEGER},
+      sdate = #{sdate,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

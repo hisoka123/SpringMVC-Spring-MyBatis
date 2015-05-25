@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ylw.dao.DxzfMapper" >
+  <resultMap id="BaseResultMap" type="ylw.model.Dxzf" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="ylw.model.Dxzf" extends="BaseResultMap" >
+    <result column="tname" property="tname" jdbcType="LONGVARCHAR" />
+    <result column="tcontent" property="tcontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id
+  </sql>
+  <sql id="Blob_Column_List" >
+    tname, tcontent
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from yl_dxzf
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from yl_dxzf
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="ylw.model.Dxzf" >
+    insert into yl_dxzf (id, tname, tcontent
+      )
+    values (#{id,jdbcType=INTEGER}, #{tname,jdbcType=LONGVARCHAR}, #{tcontent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="ylw.model.Dxzf" >
+    insert into yl_dxzf
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="tname != null" >
+        tname,
+      </if>
+      <if test="tcontent != null" >
+        tcontent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tname != null" >
+        #{tname,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tcontent != null" >
+        #{tcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ylw.model.Dxzf" >
+    update yl_dxzf
+    <set >
+      <if test="tname != null" >
+        tname = #{tname,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tcontent != null" >
+        tcontent = #{tcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="ylw.model.Dxzf" >
+    update yl_dxzf
+    set tname = #{tname,jdbcType=LONGVARCHAR},
+      tcontent = #{tcontent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

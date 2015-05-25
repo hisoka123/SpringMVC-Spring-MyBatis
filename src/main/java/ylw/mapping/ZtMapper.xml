@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ylw.dao.ZtMapper" >
+  <resultMap id="BaseResultMap" type="ylw.model.Zt" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="ztmc" property="ztmc" jdbcType="VARCHAR" />
+    <result column="tjr" property="tjr" jdbcType="INTEGER" />
+    <result column="tjsj" property="tjsj" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, ztmc, tjr, tjsj
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from yl_zt
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from yl_zt
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="ylw.model.Zt" >
+    insert into yl_zt (id, ztmc, tjr, 
+      tjsj)
+    values (#{id,jdbcType=INTEGER}, #{ztmc,jdbcType=VARCHAR}, #{tjr,jdbcType=INTEGER}, 
+      #{tjsj,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="ylw.model.Zt" >
+    insert into yl_zt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ztmc != null" >
+        ztmc,
+      </if>
+      <if test="tjr != null" >
+        tjr,
+      </if>
+      <if test="tjsj != null" >
+        tjsj,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ztmc != null" >
+        #{ztmc,jdbcType=VARCHAR},
+      </if>
+      <if test="tjr != null" >
+        #{tjr,jdbcType=INTEGER},
+      </if>
+      <if test="tjsj != null" >
+        #{tjsj,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ylw.model.Zt" >
+    update yl_zt
+    <set >
+      <if test="ztmc != null" >
+        ztmc = #{ztmc,jdbcType=VARCHAR},
+      </if>
+      <if test="tjr != null" >
+        tjr = #{tjr,jdbcType=INTEGER},
+      </if>
+      <if test="tjsj != null" >
+        tjsj = #{tjsj,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ylw.model.Zt" >
+    update yl_zt
+    set ztmc = #{ztmc,jdbcType=VARCHAR},
+      tjr = #{tjr,jdbcType=INTEGER},
+      tjsj = #{tjsj,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
