@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>zhibing_mybatis</groupId>
-  <artifactId>zhibing_mybatis</artifactId>
+  <groupId>ylw</groupId>
+  <artifactId>ylw</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
-  <name>zhibing_mybatis</name>
+  <name>ylw</name>
   <description/>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -40,11 +40,11 @@
 		<artifactId>mybatis-spring</artifactId>
 		<version>${mybatisspring.version}</version>
 	</dependency>
-    <dependency>
-		<groupId>com.oracle</groupId>
-		<artifactId>ojdbc14</artifactId>
-		<version>10.2.0.1.0</version>
-	</dependency>
+	  <dependency>
+		  <groupId>mysql</groupId>
+		  <artifactId>mysql-connector-java</artifactId>
+		  <version>5.1.18</version>
+	  </dependency>
 	<dependency>
 		<groupId>junit</groupId>
 		<artifactId>junit</artifactId>
